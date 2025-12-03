@@ -1,4 +1,4 @@
-# User Interaction Workflow - GUI Application
+# Group 6 - User Interaction Workflow for GUI Application
 
 ## User Interaction Flowchart
 
@@ -10,7 +10,7 @@ flowchart TD
     
     FillData --> Upload[User Presses<br/>'Upload Initialization Data']
     
-    Upload --> Unlock{Tabs & Features Unlocked:<br/>✓ Visualization Tab<br/>✓ Extruder Control Tab<br/>✓ Overview Tab populated}
+    Upload --> Unlock{Tabs & Features Unlocked:<br/>✓ Visualization Tab<br/>✓ Extruder Control Tab<br/>✓ Overview Tab populated<br/>✓ Event Log always accessible}
     
     Unlock --> PrePrint[Pre-Print Phase:<br/>User can navigate freely]
     
@@ -19,12 +19,14 @@ flowchart TD
     Choice1 -->|View Data| Viz[Access Visualization Tab]
     Choice1 -->|Control Extruder| Ext[Access Extruder Control Tab]
     Choice1 -->|Check Overview| Over[Access Overview Tab]
+    Choice1 -->|View Event Log| EventLog[Access Event Log Tab]
     Choice1 -->|Modify Parameters| FillData
     Choice1 -->|Continue Setup| InitBtn[Press 'Initialization' Button]
     
     Viz --> Choice1
     Ext --> Choice1
     Over --> Choice1
+    EventLog --> Choice1
     
     InitBtn --> StillFree[Initialization Complete<br/>All tabs still accessible]
     
@@ -33,17 +35,19 @@ flowchart TD
     Choice2 -->|View Data| Viz2[Access Visualization Tab]
     Choice2 -->|Control Extruder| Ext2[Access Extruder Control Tab]
     Choice2 -->|Check Overview| Over2[Access Overview Tab]
+    Choice2 -->|View Event Log| EventLog2[Access Event Log Tab]
     Choice2 -->|Begin Print| StartBtn[Press 'Start' Button]
     
     Viz2 --> Choice2
     Ext2 --> Choice2
     Over2 --> Choice2
+    EventLog2 --> Choice2
     
     StartBtn --> StateChange{State Change:<br/>✓ Extruder Control DISABLED<br/>✓ Viewer/Visualization ENABLED<br/>✓ Print Controls ENABLED}
     
     StateChange --> Printing[Print In Progress]
     
-    Printing --> Monitor[User Monitors Print:<br/>- View visualization<br/>- Check progress]
+    Printing --> Monitor[User Monitors Print:<br/>- View Event Log<br/>- Check progress]
     
     Monitor --> PrintChoice{User Action During Print}
     
@@ -73,11 +77,13 @@ flowchart TD
     style Viz fill:#f5f5f5,stroke:#666666,stroke-width:2px,color:#333333
     style Ext fill:#f5f5f5,stroke:#666666,stroke-width:2px,color:#333333
     style Over fill:#f5f5f5,stroke:#666666,stroke-width:2px,color:#333333
+    style EventLog fill:#f5f5f5,stroke:#666666,stroke-width:2px,color:#333333
     style InitBtn fill:#fff2cc,stroke:#d6b656,stroke-width:2px,color:#000
     style StillFree fill:#e1d5e7,stroke:#9673a6,stroke-width:2px,color:#000
     style Viz2 fill:#f5f5f5,stroke:#666666,stroke-width:2px,color:#333333
     style Ext2 fill:#f5f5f5,stroke:#666666,stroke-width:2px,color:#333333
     style Over2 fill:#f5f5f5,stroke:#666666,stroke-width:2px,color:#333333
+    style EventLog2 fill:#f5f5f5,stroke:#666666,stroke-width:2px,color:#333333
     style StartBtn fill:#fff2cc,stroke:#d6b656,stroke-width:2px,color:#000
     style StateChange fill:#ffe6cc,stroke:#d79b00,stroke-width:2px,color:#000
     style Printing fill:#b1ddf0,stroke:#10739e,stroke-width:2px,color:#000
@@ -87,59 +93,4 @@ flowchart TD
     style Emergency fill:#a20025,stroke:#6F0000,stroke-width:2px,color:#ffffff
     style Paused fill:#fad7ac,stroke:#b46504,stroke-width:2px,color:#000
     style ResumeBtn fill:#d5e8d4,stroke:#82b366,stroke-width:2px,color:#000
-```
-
-## Workflow States Summary
-
-### 1. **Initial State**
-- Only Initialization Tab is accessible
-- All other features locked
-
-### 2. **Post-Upload State** (After 'Upload Initialization Data')
-- ✅ Visualization Tab enabled
-- ✅ Extruder Control Tab enabled
-- ✅ Overview Tab populated with data
-- User has full control and can navigate freely
-
-### 3. **Post-Initialization State** (After 'Initialization' Button)
-- All tabs remain accessible
-- System configured and ready for printing
-- User can still make adjustments
-
-### 4. **Active Print State** (After 'Start' Button)
-- ❌ Extruder Control Tab **DISABLED**
-- ✅ Visualization/Viewer **ACCESSIBLE**
-- ✅ Print Control Buttons **ENABLED**:
-  - Stop
-  - Pause
-  - Resume (when paused)
-  - Emergency Stop
-
-### 5. **Paused State**
-- Print temporarily halted
-- User can resume or stop completely
-- Visualization remains accessible
-
-### 6. **Completed/Stopped State**
-- Print finished or terminated
-- Session complete
-
-## Key User Decision Points
-
-1. **After Upload**: Choose to explore tabs or proceed with initialization
-2. **After Initialization**: Choose to make final checks or start printing
-3. **During Print**: Monitor, pause, stop, or emergency stop
-4. **When Paused**: Resume or terminate print
-
-## Access Control Matrix
-
-| Feature/Tab | Initial | Post-Upload | Post-Init | During Print | Paused |
-|-------------|---------|-------------|-----------|--------------|--------|
-| Initialization Tab | ✅ | ✅ | ✅ | ❌ | ❌ |
-| Visualization Tab | ❌ | ✅ | ✅ | ✅ | ✅ |
-| Extruder Control | ❌ | ✅ | ✅ | ❌ | ❌ |
-| Overview Tab | ❌* | ✅ | ✅ | ✅ | ✅ |
-| Print Controls | ❌ | ❌ | ❌ | ✅ | ✅ |
-
-*Overview Tab is accessible but empty until data is uploaded
 ```
