@@ -365,7 +365,7 @@ code {
           : 'default'
     });
   </script>
-<h1 id="group-6---user-interaction-workflow-for-gui-application">Group 6 - User Interaction Workflow for GUI Application</h1>
+<h1 id="user-interaction-workflow---gui-application">Group 6 - User Interaction Workflow for GUI Application</h1>
 <h2 id="user-interaction-flowchart">User Interaction Flowchart</h2>
 <pre><code class="language-mermaid"><div class="mermaid">flowchart TD
     Start([User Launches GUI]) --> Init[Initialization Tab Opens<br/>Auto-loaded]
@@ -407,7 +407,7 @@ code {
     
     StateChange --> Printing[Print In Progress]
     
-    Printing --> Monitor[User Monitors Print:<br/>- View visualization<br/>- Check progress]
+    Printing --> Monitor[User Monitors Print:<br/>- Check progress]
     
     Monitor --> PrintChoice{User Action During Print}
     
@@ -452,6 +452,113 @@ code {
     style Paused fill:#fad7ac,stroke:#b46504,stroke-width:2px,color:#000
     style ResumeBtn fill:#d5e8d4,stroke:#82b366,stroke-width:2px,color:#000
 </div></code></pre>
+<h2 id="workflow-states-summary">Workflow States Summary</h2>
+<h3 id="1-initial-state">1. <strong>Initial State</strong></h3>
+<ul>
+<li>Only Initialization Tab is accessible</li>
+<li>All other features locked</li>
+</ul>
+<h3 id="2-post-upload-state-after-upload-initialization-data">2. <strong>Post-Upload State</strong> (After 'Upload Initialization Data')</h3>
+<ul>
+<li>✅ Visualization Tab enabled</li>
+<li>✅ Extruder Control Tab enabled</li>
+<li>✅ Overview Tab populated with data</li>
+<li>User has full control and can navigate freely</li>
+</ul>
+<h3 id="3-post-initialization-state-after-initialization-button">3. <strong>Post-Initialization State</strong> (After 'Initialization' Button)</h3>
+<ul>
+<li>All tabs remain accessible</li>
+<li>System configured and ready for printing</li>
+<li>User can still make adjustments</li>
+</ul>
+<h3 id="4-active-print-state-after-start-button">4. <strong>Active Print State</strong> (After 'Start' Button)</h3>
+<ul>
+<li>❌ Extruder Control Tab <strong>DISABLED</strong></li>
+<li>✅ Visualization/Viewer <strong>ACCESSIBLE</strong></li>
+<li>✅ Print Control Buttons <strong>ENABLED</strong>:
+<ul>
+<li>Stop</li>
+<li>Pause</li>
+<li>Resume (when paused)</li>
+<li>Emergency Stop</li>
+</ul>
+</li>
+</ul>
+<h3 id="5-paused-state">5. <strong>Paused State</strong></h3>
+<ul>
+<li>Print temporarily halted</li>
+<li>User can resume or stop completely</li>
+<li>Visualization remains accessible</li>
+</ul>
+<h3 id="6-completedstopped-state">6. <strong>Completed/Stopped State</strong></h3>
+<ul>
+<li>Print finished or terminated</li>
+<li>Session complete</li>
+</ul>
+<h2 id="key-user-decision-points">Key User Decision Points</h2>
+<ol>
+<li><strong>After Upload</strong>: Choose to explore tabs or proceed with initialization</li>
+<li><strong>After Initialization</strong>: Choose to make final checks or start printing</li>
+<li><strong>During Print</strong>: Monitor, pause, stop, or emergency stop</li>
+<li><strong>When Paused</strong>: Resume or terminate print</li>
+</ol>
+<h2 id="access-control-matrix">Access Control Matrix</h2>
+<table>
+<thead>
+<tr>
+<th>Feature/Tab</th>
+<th>Initial</th>
+<th>Post-Upload</th>
+<th>Post-Init</th>
+<th>During Print</th>
+<th>Paused</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Initialization Tab</td>
+<td>✅</td>
+<td>✅</td>
+<td>✅</td>
+<td>❌</td>
+<td>❌</td>
+</tr>
+<tr>
+<td>Visualization Tab</td>
+<td>❌</td>
+<td>✅</td>
+<td>✅</td>
+<td>✅</td>
+<td>✅</td>
+</tr>
+<tr>
+<td>Extruder Control</td>
+<td>❌</td>
+<td>✅</td>
+<td>✅</td>
+<td>❌</td>
+<td>❌</td>
+</tr>
+<tr>
+<td>Overview Tab</td>
+<td>❌*</td>
+<td>✅</td>
+<td>✅</td>
+<td>✅</td>
+<td>✅</td>
+</tr>
+<tr>
+<td>Print Controls</td>
+<td>❌</td>
+<td>❌</td>
+<td>❌</td>
+<td>✅</td>
+<td>✅</td>
+</tr>
+</tbody>
+</table>
+<p>*Overview Tab is accessible but empty until data is uploaded</p>
+<pre class="hljs"><code><div></div></code></pre>
 
 </body>
 </html>
