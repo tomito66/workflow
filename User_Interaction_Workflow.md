@@ -1,4 +1,4 @@
-# Group 6 - User Interaction Workflow for GUI Application
+# User Interaction Workflow - GUI Application
 
 ## User Interaction Flowchart
 
@@ -87,4 +87,59 @@ flowchart TD
     style Emergency fill:#a20025,stroke:#6F0000,stroke-width:2px,color:#ffffff
     style Paused fill:#fad7ac,stroke:#b46504,stroke-width:2px,color:#000
     style ResumeBtn fill:#d5e8d4,stroke:#82b366,stroke-width:2px,color:#000
+```
+
+## Workflow States Summary
+
+### 1. **Initial State**
+- Only Initialization Tab is accessible
+- All other features locked
+
+### 2. **Post-Upload State** (After 'Upload Initialization Data')
+- ✅ Visualization Tab enabled
+- ✅ Extruder Control Tab enabled
+- ✅ Overview Tab populated with data
+- User has full control and can navigate freely
+
+### 3. **Post-Initialization State** (After 'Initialization' Button)
+- All tabs remain accessible
+- System configured and ready for printing
+- User can still make adjustments
+
+### 4. **Active Print State** (After 'Start' Button)
+- ❌ Extruder Control Tab **DISABLED**
+- ✅ Visualization/Viewer **ACCESSIBLE**
+- ✅ Print Control Buttons **ENABLED**:
+  - Stop
+  - Pause
+  - Resume (when paused)
+  - Emergency Stop
+
+### 5. **Paused State**
+- Print temporarily halted
+- User can resume or stop completely
+- Visualization remains accessible
+
+### 6. **Completed/Stopped State**
+- Print finished or terminated
+- Session complete
+
+## Key User Decision Points
+
+1. **After Upload**: Choose to explore tabs or proceed with initialization
+2. **After Initialization**: Choose to make final checks or start printing
+3. **During Print**: Monitor, pause, stop, or emergency stop
+4. **When Paused**: Resume or terminate print
+
+## Access Control Matrix
+
+| Feature/Tab | Initial | Post-Upload | Post-Init | During Print | Paused |
+|-------------|---------|-------------|-----------|--------------|--------|
+| Initialization Tab | ✅ | ✅ | ✅ | ❌ | ❌ |
+| Visualization Tab | ❌ | ✅ | ✅ | ✅ | ✅ |
+| Extruder Control | ❌ | ✅ | ✅ | ❌ | ❌ |
+| Overview Tab | ❌* | ✅ | ✅ | ✅ | ✅ |
+| Print Controls | ❌ | ❌ | ❌ | ✅ | ✅ |
+
+*Overview Tab is accessible but empty until data is uploaded
 ```
